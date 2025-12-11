@@ -4,39 +4,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Cause:wght@400;700&display=swap');
 
 /* Reset some default styles */
-body, h1, h2, h3, p, ul, li, a, button, form {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Cause', sans-serif;
 }
 
+:root{
+    --light: #f9f7f6;
+    --dark: #333;
+    --light-pink: #ecd1df;
+    --sage-green: #adb58f;
+    --accent-pink: #d15f9c;
+    --accent-green: #85954e;
+}
+
 /* Body and background */
 body {
-    background-color: #f9f7f6; /* off-white background */
-    color: #000; /* default text color black */
+    background-color: var(--light); /* off-white background */
+    color: black; /* default text color black */
     padding: 20px;
     line-height: 1.6;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 /* Headings */
 h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #333;
+    margin: 1rem;
+    color: var(--dark);
 }
 
 h2 {
     font-size: 1.8rem;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #333;
+    margin: 1rem;
+    color: black;
 }
 
 h3 {
     font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #666;
+    color: var(--dark);
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    padding: 0 0.5rem;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #edc9db;
+    border-radius: 10px;
 }
 
 /* Navigation */
@@ -45,24 +74,40 @@ nav {
 }
 
 nav a {
-    text-decoration: none;
-    color: #6b705c; /* sage green */
+    color: var(--dark);
     margin-right: 15px;
     font-weight: 600;
+    font-size: large;
+    padding: 0.25rem 0.5rem;
 }
 
 nav a:hover {
-    color: #ff6b81; /* pink accent */
+    text-decoration: none;
+    background-color: var(--accent-pink);
+    border-radius: 5px;
+}
+
+.welcome {
+    display: flex;
+    justify-content: right;
+}
+
+.add {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
 }
 
 /* Forms */
-form {
-    margin-bottom: 20px;
+.regular {
+    max-width: 500px;
+    margin: 0 auto 20px auto;
 }
 
-form button {
-    background-color: #6b705c; /* sage green */
-    color: #fff;
+form button,
+.add{
+    background-color: var(--accent-green); /* sage green */
+    color: white;
     padding: 6px 12px;
     border: none;
     border-radius: 4px;
@@ -70,8 +115,9 @@ form button {
     font-weight: bold;
 }
 
-form button:hover {
-    background-color: #ff6b81; /* pink accent on hover */
+form button:hover,
+.add:hover {
+    background-color: var(--accent-pink) /* pink accent on hover */
 }
 
 /* Inputs inside forms */
@@ -84,11 +130,11 @@ input, textarea {
 }
 
 /* Links */
-a {
-    color: #ff6b81;
+.outside a {
+    color: var(--accent-pink);
 }
 
-a:hover {
+.outside a:hover {
     text-decoration: underline;
 }
 
@@ -117,6 +163,11 @@ ul li button {
     cursor: pointer;
 }
 
+.list button:hover {
+    background: none;
+    border: none;
+}
+
 /* Delete link */
 ul li a {
     margin-left: 10px;
@@ -138,3 +189,34 @@ body > h1, body > h2 {
     margin-bottom: 15px;
 }
 
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.close-btn {
+    background-color: #f87171; /* pink accent */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}

@@ -5,15 +5,31 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'habits/css/style.css' %}">
 </head>
-<body>    
-    <h1>Add New Habit</h1>
+<body> 
+    <header>  
+        <h2>Habit Tracker</h2>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Habit</button>
-    </form>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'habit_logs' %}">Habit Logs</a>
+        </nav>
 
-    <a href="{% url 'home' %}">Back to Home</a>
+        <section class="welcome">
+            <p>Welcome, {{ request.user.username }}!</p>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" >Logout</button>
+            </form>
+        </section>
+    </header> 
+
+    <main>
+        <h1>Add New Habit</h1>
+        <form class="regular" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Habit</button>
+        </form>
+    </main>
 </body>
 </html>

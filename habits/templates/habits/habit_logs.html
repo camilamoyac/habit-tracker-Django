@@ -6,23 +6,83 @@
     <link rel="stylesheet" href="{% static 'habits/css/style.css' %}">
 </head>
 <body>
-    <h1>Habit Logs</h1>
+    <header>
+        <h2>Habit Tracker</h2>
 
-    <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'habit_logs' %}">Habit Logs</a>
-    </nav>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'habit_logs' %}">Habit Logs</a>
+        </nav>
 
-    {% for entry in habit_entries %}
-        <div class="habit">
-            <h2>{{ entry.habit.name }} (Streak: {{ entry.streak }}/{{ entry.habit.target_streak }})</h2>
-            <h3>{{entry.habit.description}}</h3>
-            <ul>
-                {% for log in entry.logs %}
-                    <li>{{ log.date }} - {% if log.done %}✔{% else %}✖{% endif %}</li>
-                {% endfor %}
-            </ul>
+        <section class="welcome">
+            <p>Welcome, {{ request.user.username }}!</p>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" >Logout</button>
+            </form>
+        </section>
+    </header>
+
+    <main>
+        <h1>Habit Logs</h1>
+        {% for entry in habit_entries %}
+            <div class="habit">
+                <h2>{{ entry.habit.name }} (Streak: {{ entry.streak }}/{{ entry.habit.target_streak }})</h2>
+                <h3>{{entry.habit.description}}</h3>
+                <ul>
+                    {% for log in entry.logs %}
+                        <li>{{ log.date }} - {% if log.done %}✔{% else %}✖{% endif %}</li>
+                    {% endfor %}
+                </ul>
+
+                {% if entry.streak >= entry.habit.target_streak %}
+                    <div class="confetti-target" data-habit="{{ entry.habit.name }}"></div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div id="streakModal" class="modal">
+            <div class="modal-content">
+                <h2 id="modalText"></h2>
+                <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
         </div>
-    {% endfor %}
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const confettiElements = document.querySelectorAll(".confetti-target");
+        if(confettiElements.length > 0){
+            confettiElements.forEach(el => {
+                const habitName = el.dataset.habit;
+
+                // Confetti
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+
+                // Show modal
+                setTimeout(() => {
+                    showModal(`🎉 Congratulations! You reached your streak goal for "${habitName}"!`);
+                }, 1000);
+            });
+        }
+    });
+
+    function showModal(message){
+        const modal = document.getElementById("streakModal");
+        const modalText = document.getElementById("modalText");
+        modalText.textContent = message;
+        modal.style.display = "block";
+    }
+
+    function closeModal(){
+        const modal = document.getElementById("streakModal");
+        modal.style.display = "none";
+    }
+    </script>
 </body>
 </html>
