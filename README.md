@@ -1,34 +1,79 @@
 # Overview
 
-{Important!  Do not say in this section that this is college assignment.  Talk about what you are trying to accomplish as a software engineer to further your learning.}
+The Habit Tracker web app was developed to help users monitor and maintain their daily habits, track progress over time, and stay motivated to achieve personal goals. The project allowed me to deepen my understanding of web development using Django, database management with models, user authentication, and interactive front-end features with JavaScript.
 
-{Provide a description the web app that you wrote. Describe how to start a test server on your computer and what website to open up to see the first page of the app.}
+This web app allows users to:
 
-{Describe your purpose for writing this software.}
+- Create an account and log in.
+- Add new habits with optional description and streak goals.
+- Check off habits each day, with automatic tracking of daily completion.
+- View historical habit logs and current streaks.
+  -Celebrate streak goals with interactive confetti and a modal message.
 
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running (starting the server and navigating through the web pages) and a walkthrough of the code.}
+How to run the app:
+
+- Clone the repository and navigate into the project directory.
+- Install dependencies (Python 3.x and Django 5.x required).
+- Run the test server using:
+  `python manage.py runserver`
+- Open the browser at http://127.0.0.1:8000/ to see the home page.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
 # Web Pages
 
-{Describe each of the web pages you created and how the web app transitions between each of them.  Also describe what is dynamically created on each page.}
+1. Home Page
+
+   - Displays the user's habits for today.
+   - Users can mark each habit as done or undone.
+   - Provides links to add new habits or view the Habit Logs page.
+
+2. Add Habit Page
+
+   - Users can create a new habit with optional description and streak goal.
+   - Upon submission, users are redirected to the home page.
+
+3. Habit Logs Page
+
+   - Shows all historical logs for each habit.
+   - Displays streak information and a detailed history of completion.
+   - Confetti animation and a congratulatory modal appear when a streak goal is reached.
+
+4. Register Page
+
+   - Allows new users to create an account.
+   - Redirects to login after successful registration.
+
+5. Login Page
+   - Authenticates existing users.
+   - Provides a link to the registration page for new users.
+
+All pages dynamically render content based on the logged-in user and their data in the database.
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
-
-{Describe the programming language that you used and any libraries.}
+- Framework: Django 5.x
+- Programming Language: Python 3.x
+- Database: SQLite (default for Django, stores users, habits, and habit logs)
+- Front-End: HTML, CSS, JavaScript
+- Libraries and Tools:
+  - Django built-in libraries (models, views, templates, authentication)
+  - Google Fonts (Cause font)
+  - Vanilla JavaScript for confetti animations and modals
+- Editor/IDE: VS Code
 
 # Useful Websites
 
 {Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+
+- [Django Docs](https://docs.djangoproject.com/en/6.0/)
+- [Confetti JS Library](https://confetti.js.org/)
+- [Google Fonts](https://fonts.google.com/)
 
 # Future Work
 
 {Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+
+- Add the ability to edit existing habits (name, description, streak goal).
+- Implement a calendar-style visualization of habit logs.
+- Improve UI/UX with responsive design for mobile devices.
