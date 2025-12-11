@@ -18,7 +18,7 @@ How to run the app:
   `python manage.py runserver`
 - Open the browser at http://127.0.0.1:8000/ to see the home page.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/z95JwbYypgY)
 
 # Web Pages
 
