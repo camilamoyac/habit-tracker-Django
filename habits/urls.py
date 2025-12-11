@@ -8,4 +8,5 @@ urlpatterns = [
     path('delete/<int:habit_id>/', views.delete_habit, name='delete_habit'),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='habits/login.html'), name='login'),
+    path('logs/', views.habit_logs, name='habit_logs'),
 ]

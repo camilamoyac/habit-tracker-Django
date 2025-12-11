@@ -4,7 +4,8 @@ from .models import Habit
 class HabitForm(forms.ModelForm):
     class Meta:
         model = Habit
-        fields = ['name']
+        fields = ['name', 'description', 'target_streak']  # Add optional fields
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'})
+            'description': forms.Textarea(attrs={'rows': 3, 'cols': 40}),
+            'target_streak': forms.NumberInput(attrs={'min': 1}),
         }

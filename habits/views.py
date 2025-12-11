@@ -5,29 +5,27 @@ from .models import Habit, HabitLog
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .forms import HabitForm
+from collections import defaultdict
+from datetime import timedelta
 
 @login_required
 def home(request):
-    today = timezone.localdate()
+    today = timezone.localdate() - timezone.timedelta(days=0)
     habits = Habit.objects.filter(user=request.user)
 
     for habit in habits:
         HabitLog.objects.get_or_create(habit=habit, date=today)
 
-    logs = HabitLog.objects.filter(habit__user=request.user, date=today)
+    logs = HabitLog.objects.filter(habit__user=request.user, date=today).select_related('habit')
 
     if request.method == 'POST':
-        habit_id = request.POST.get('habit_id')
-        log = HabitLog.objects.get(habit_id=habit_id, date=today)
+        log_id = request.POST.get('log_id')
+        log = HabitLog.objects.get(id=log_id)
         log.done = not log.done  # toggle
         log.save()
         return redirect('home')
 
-    print("LOGS:", logs)
-    print("HABITS:", habits)
-
     return render(request, 'habits/home.html', {
-    'habits': habits,
     'logs': logs,
 })
 
@@ -50,6 +48,24 @@ def delete_habit(request, habit_id):
     habit = Habit.objects.get(id=habit_id, user=request.user)
     habit.delete()
     return redirect('home')
+
+@login_required
+def habit_logs(request):
+    habits = Habit.objects.filter(user=request.user)
+    habit_entries = []
+
+    for habit in habits:
+        logs = HabitLog.objects.filter(habit=habit).order_by('-date')
+        streak = habit.get_streak()  # you need to implement this method in Habit
+        habit_entries.append({
+            'habit': habit,
+            'logs': logs,
+            'streak': streak,
+        })
+
+    return render(request, 'habits/habit_logs.html', {
+        'habit_entries': habit_entries
+    })
 
 def register(request):
     if request.method == 'POST':

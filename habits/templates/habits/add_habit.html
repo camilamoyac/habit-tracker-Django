@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Habit</title>
+    <title>Add New Habit | Habit Tracker</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'habits/css/style.css' %}">
 </head>
-<body>
-    <h2>Add New Habit</h2>
+<body>    
+    <h1>Add New Habit</h1>
 
     <form method="POST">
         {% csrf_token %}

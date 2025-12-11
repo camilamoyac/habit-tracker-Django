@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Habit Logs | Habit Tracker</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'habits/css/style.css' %}">
+</head>
+<body>
+    <h1>Habit Logs</h1>
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'habit_logs' %}">Habit Logs</a>
+    </nav>
+
+    {% for entry in habit_entries %}
+        <div class="habit">
+            <h2>{{ entry.habit.name }} (Streak: {{ entry.streak }}/{{ entry.habit.target_streak }})</h2>
+            <h3>{{entry.habit.description}}</h3>
+            <ul>
+                {% for log in entry.logs %}
+                    <li>{{ log.date }} - {% if log.done %}✔{% else %}✖{% endif %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</body>
+</html>
