@@ -64,15 +64,11 @@ All pages dynamically render content based on the logged-in user and their data 
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-
 - [Django Docs](https://docs.djangoproject.com/en/6.0/)
 - [Confetti JS Library](https://confetti.js.org/)
 - [Google Fonts](https://fonts.google.com/)
 
 # Future Work
-
-{Make a list of things that you need to fix, improve, and add in the future.}
 
 - Add the ability to edit existing habits (name, description, streak goal).
 - Implement a calendar-style visualization of habit logs.
